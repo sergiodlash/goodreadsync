@@ -1,6 +1,6 @@
-# GoodReadSyn Plugin
+# GoodReadSync Plugin
 
-GoodReadSyn is a small plugin for [Obsidian](https://obsidian.md) to automatically create notes for the books in your [Goodreads](https://www.goodreads.com) shelves.
+GoodReadSync is a small plugin for [Obsidian](https://obsidian.md) to automatically create notes for the books in your [Goodreads](https://www.goodreads.com) shelves.
 
 The plugin uses Goodreads RSS feed to create a note for the books in the shelf specified in the settings.
 
