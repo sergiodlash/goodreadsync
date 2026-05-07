@@ -1,14 +1,14 @@
-# Readsidian Plugin
+# GoodReadSyn Plugin
 
-Readsidian is a small plugin for [Obsidian](https://obsidian.md) to automatically create notes for the books in your [Goodreads](https://www.goodreads.com) shelves.
+GoodReadSyn is a small plugin for [Obsidian](https://obsidian.md) to automatically create notes for the books in your [Goodreads](https://www.goodreads.com) shelves.
 
 The plugin uses Goodreads RSS feed to create a note for the books in the shelf specified in the settings.
 
 ## Setup
 
-Create a template note, like the example provided in `Readsidian Template.md`.
+Create a template note, like the example provided in `GRSync Template.md`.
 
-To avoid duplicates, your book note **must** contain the property `bookID: {{ book_id }}`. This is Goodreads' unique identifier that is used to avoid duplicated imports.
+To avoid duplicates, your book note **must** contain the property `bookID: {{ book_id }}`. This is Goodreads' unique identifier that the plugin checks before importing the same note twice.
 
 In the plugin settings, set your user ID, the name of the bookshelf you wish to import, the target directory in your vault where the notes should be created, and the path to the template note.
 
@@ -16,7 +16,7 @@ To get your user id, go to your goodreads profile url and copy the last part. Fo
 
 ## Usage
 
-You can call the import command from the command palette to import new books into your vault. You can also click the the readsidian book icon from the left ribbon to call the import command.
+You can call the import command from the command palette to import new books into your vault. You can also click the the goodreadsync book icon from the left ribbon to call the import command.
 
 ---
 
