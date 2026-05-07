@@ -1,7 +1,7 @@
 {
-	"name": "readsidian",
+	"name": "goodreadsync",
 	"version": "0.2.0",
-	"description": "This is plugin to automatically integrate books from goodreads to Obsidian (https://obsidian.md)",
+	"description": "Sync book information from Goodreads into your vault.",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",

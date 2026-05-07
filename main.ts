@@ -1,34 +1,34 @@
 import { App, Notice, Plugin, PluginSettingTab, Setting, TFile } from 'obsidian'
 import { goodReadsParser } from './goodreads-rss-parser'
 
-interface ReadsidianSettings {
+interface GoodReadSyncSettings {
 	goodReadsUserID: string
 	bookshelf: string
-	readsidianDirectory: string
+	goodreadsyncDirectory: string
 	templateNote: string
 }
 
-const DEFAULT_SETTINGS: ReadsidianSettings = {
+const DEFAULT_SETTINGS: GoodReadSyncSettings = {
 	goodReadsUserID: '',
 	bookshelf: 'read',
-	readsidianDirectory: '',
+	goodreadsyncDirectory: '',
 	templateNote: ''
 }
 
-export default class Readsidian extends Plugin {
-	settings: ReadsidianSettings
+export default class GoodReadSync extends Plugin {
+	settings: GoodReadSyncSettings
 
 	async onload () {
 		await this.loadSettings()
 
 		const ribbonIconEl = this.addRibbonIcon(
 			'book',
-			'Readsidian',
+			'GoodReadSync',
 			(evt: MouseEvent) => {
 				this.fetchBooks()
 			}
 		)
-		ribbonIconEl.addClass('readsidian-ribbon-class')
+		ribbonIconEl.addClass('goodreadsync-ribbon-class')
 
 		this.addCommand({
 			id: 'import-to-template',
@@ -39,7 +39,7 @@ export default class Readsidian extends Plugin {
 		})
 
 		// This adds a settings tab so the user can configure various aspects of the plugin
-		this.addSettingTab(new ReadsidianSettingTab(this.app, this))
+		this.addSettingTab(new GoodReadSyncSettingTab(this.app, this))
 
 		// If the plugin hooks up any global DOM events (on parts of the app that doesn't belong to this plugin)
 		// Using this function will automatically remove the event listener when this plugin is disabled.
@@ -81,7 +81,7 @@ export default class Readsidian extends Plugin {
 
 			const templateContent = await this.getTemplateContent()
 
-			const folderPath = this.settings.readsidianDirectory.replace(
+			const folderPath = this.settings.goodreadsyncDirectory.replace(
 				/\/+$/,
 				''
 			)
@@ -121,9 +121,9 @@ export default class Readsidian extends Plugin {
 				}
 			}
 		} catch (error) {
-			console.error('Readsidian: fetchBooks failed', error)
+			console.error('GoodReadSync: fetchBooks failed', error)
 			new Notice(
-				`Readsidian error fetching books: ${
+				`GoodReadSync error fetching books: ${
 					error instanceof Error ? error.message : String(error)
 				}`
 			)
@@ -144,7 +144,7 @@ export default class Readsidian extends Plugin {
 	// Helper Functions
 
 	async listBookIDs () {
-		const folderPath = this.settings.readsidianDirectory
+		const folderPath = this.settings.goodreadsyncDirectory
 		const files = await this.app.vault.getMarkdownFiles()
 		const bookIDs: string[] = []
 
@@ -166,7 +166,7 @@ export default class Readsidian extends Plugin {
 
 		if (!templatePath) {
 			new Notice(
-				'Readsidian: No template path set. Please configure it in settings.'
+				'GoodReadSync: No template path set. Please configure it in settings.'
 			)
 			return
 		}
@@ -189,10 +189,10 @@ export default class Readsidian extends Plugin {
 	}
 }
 
-class ReadsidianSettingTab extends PluginSettingTab {
-	plugin: Readsidian
+class GoodReadSyncSettingTab extends PluginSettingTab {
+	plugin: GoodReadSync
 
-	constructor (app: App, plugin: Readsidian) {
+	constructor (app: App, plugin: GoodReadSync) {
 		super(app, plugin)
 		this.plugin = plugin
 	}
@@ -236,9 +236,9 @@ class ReadsidianSettingTab extends PluginSettingTab {
 			.addText(text =>
 				text
 					.setPlaceholder('myBooks')
-					.setValue(this.plugin.settings.readsidianDirectory)
+					.setValue(this.plugin.settings.goodreadsyncDirectory)
 					.onChange(async value => {
-						this.plugin.settings.readsidianDirectory = value
+						this.plugin.settings.goodreadsyncDirectory = value
 						await this.plugin.saveSettings()
 					})
 			)
@@ -248,7 +248,7 @@ class ReadsidianSettingTab extends PluginSettingTab {
 			.setDesc('Set the template for the new book notes')
 			.addText(text =>
 				text
-					.setPlaceholder('Temps/ReadsidianTemplate.md')
+					.setPlaceholder('Temps/GoodReadSyncTemplate.md')
 					.setValue(this.plugin.settings.templateNote)
 					.onChange(async value => {
 						this.plugin.settings.templateNote = value

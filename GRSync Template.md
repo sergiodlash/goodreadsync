@@ -1,5 +1,5 @@
 ---
-type: readsidianBooks
+type: GRSyncBooks
 bookID: {{ book_id }}
 author: '[[{{ author_name }}]]'
 isbn: {{ isbn }}
