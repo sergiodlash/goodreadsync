@@ -89,7 +89,10 @@ export default class GoodReadSync extends Plugin {
 			for (const item of feed.items) {
 				if (!localBooks.includes(item.book_id)) {
 					// Create the note
-					const title = item.title.replace(/[:\/\\]/g, '') // Replace illegal chars with blank
+					const isWindows = process.platform === 'win32'
+					const title = isWindows
+						? item.title.replace(/[#^[\]|.<>:"/\\?*]/g, '') // Windows illegal note names
+						: item.title.replace(/[:\/\\]/g, '') // Mac/Linux
 					const fileName = `${title}.md`
 					const filePath = `${folderPath}/${fileName}`
 
