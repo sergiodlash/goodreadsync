@@ -1,6 +1,6 @@
 {
 	"name": "goodreadsync",
-	"version": "0.1.3",
+	"version": "0.1.1",
 	"description": "Sync book information from Goodreads into your vault.",
 	"main": "main.js",
 	"scripts": {
